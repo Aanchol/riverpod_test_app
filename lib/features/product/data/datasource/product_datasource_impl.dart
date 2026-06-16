@@ -1,24 +1,27 @@
-import 'package:dio/dio.dart';
 import 'package:riverpod_test_app/features/product/data/datasource/product_datasource.dart';
 
-import '../models/product_list_response_model.dart';
+// class ProductsDatasourceImpl implements ProductsDatasource {
+//   //final Dio dio;
+//   final ApiService api;
+//
+//   ProductsDatasourceImpl(this.api);
+//
+//   @override
+//   Future<ProductsListResponseModel> fetchProductList() async {
+//     return api.getProducts();
+//   }
+// }
 
-class ProductsDatasourceImpl
-    implements ProductsDatasource {
+import '../models/products_response_model.dart';
+import 'products_api_service.dart';
 
-  final Dio dio;
+class ProductsDataSourceImpl implements ProductsDataSource {
+  final ProductsApiService apiService;
 
-  ProductsDatasourceImpl(this.dio);
+  ProductsDataSourceImpl(this.apiService);
 
   @override
-  Future<ProductsListResponseModel> fetchProductList() async {
-
-    final response = await dio.get(
-      'https://dummyjson.com/products',
-    );
-
-    return ProductsListResponseModel.fromJson(
-      response.data,
-    );
+  Future<ProductsResponseModel> getProducts() {
+    return apiService.getProducts();
   }
 }

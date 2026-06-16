@@ -1,39 +1,30 @@
-import 'package:flutter_riverpod/legacy.dart';
-import 'package:riverpod_test_app/features/product/presentation/providers/products_state.dart';
+import 'dart:async';
 
-import '../../domain/usecases/products_usecase.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_test_app/features/product/presentation/providers/products_provider.dart';
 
-class ProductsNotifier
-    extends StateNotifier<ProductsState> {
+import '../../domain/entities/products_entity.dart';
 
-  final ProductsUseCase productsUseCase;
+class ProductNotifier extends AsyncNotifier<List<ProductEntity>> {
+  @override
+  Future<List<ProductEntity>> build() async {
+    return await ref.read(getProductsUseCaseProvider).call();
+  }
 
-  ProductsNotifier(this.productsUseCase)
-      : super(const ProductsState());
+  // late final ProductsUseCase _useCase;
+  //
+  // @override
+  // Future<List<ProductEntity>> build() async {
+  //   _useCase = ref.read(getProductsUseCaseProvider);
+  //
+  //   return await _useCase();
+  // }
+  //
+  Future<void> refresh() async {
+    state = const AsyncLoading();
 
-  Future<void> getProductList() async {
-
-    state = state.copyWith(
-      isLoading: true,
-      error: null,
-    );
-
-    try {
-
-      final products = await productsUseCase.callProductList();
-
-      state = state.copyWith(
-        isLoading: false,
-        products: products,
-      );
-
-    } catch (e) {
-
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      );
-    }
+    state = await AsyncValue.guard(() async {
+      return await ref.read(getProductsUseCaseProvider).call();
+    });
   }
 }
-

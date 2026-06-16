@@ -1,20 +1,44 @@
-import 'package:riverpod_test_app/features/product/domain/entities/products_entity.dart';
+// class ProductsRepositoryImpl
+//     implements ProductsRepository {
+//
+//   final ProductsDatasource datasource;
+//
+//   ProductsRepositoryImpl(this.datasource);
+//
+//   @override
+//   Future<ProductsEntity> fetchProductList() async {
+//
+//     final model = await datasource.fetchProductList();
+//
+//     return model.toEntity();
+//   }
+// }
 
+import '../../domain/entities/products_entity.dart';
 import '../../domain/repositories/products_repository.dart';
 import '../datasource/product_datasource.dart';
 
-class ProductsRepositoryImpl
-    implements ProductsRepository {
+class ProductsRepositoryImpl implements ProductsRepository {
+  final ProductsDataSource dataSource;
 
-  final ProductsDatasource datasource;
-
-  ProductsRepositoryImpl(this.datasource);
+  ProductsRepositoryImpl(this.dataSource);
 
   @override
-  Future<ProductsEntity> fetchProductList() async {
+  Future<List<ProductEntity>> getProducts() async {
+    final response = await dataSource.getProducts();
 
-    final model = await datasource.fetchProductList();
-
-    return model.toEntity();
+    return response.products
+        .map(
+          (e) => ProductEntity(
+            //id: e.id,
+            title: e.title,
+            description: e.description,
+            category: e.category,
+            price: e.price,
+            rating: e.rating,
+            thumbnail: e.thumbnail,
+          ),
+        )
+        .toList();
   }
 }

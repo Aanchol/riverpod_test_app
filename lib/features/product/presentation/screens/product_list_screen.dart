@@ -2,72 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/products_provider.dart';
-import '../widgets/product_card_widget.dart';
 
-class ProductListScreen extends ConsumerStatefulWidget {
+class ProductListScreen extends ConsumerWidget {
   const ProductListScreen({super.key});
 
   @override
-  ConsumerState<ProductListScreen> createState() =>
-      _ProductListScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productState = ref.watch(productProvider);
 
-class _ProductListScreenState
-    extends ConsumerState<ProductListScreen> {
-
-  @override
-  void initState() {
-    super.initState();
-
-    Future.microtask(() {
-      ref.read(productListProvider.notifier).getProductList();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    final state = ref.watch(productListProvider);
-    if (state.isLoading) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-    if (state.error != null) {
-      print(state.error);
-      return Scaffold(
-        body: Center(
-          child: Text(state.error!),
-        ),
-      );
-    }
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Products"),
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: state.products?.productsList.length,
-        itemBuilder: (context, index) {
-          final product = state.products?.productsList ?? [];
-
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: ProductCard(thumbnail: product[index].thumbnail??"",
-            title: product[index].title??"",
-              description: product[index].description??"",
-              category: product[index].category,
-              price: product[index].price,
-              discountPercentage: product[index].discountPercentage,
-              rating: product[index].rating,
-              stock: product[index].stock,
-              tags: product[index].tags,
-              brand: product[index].brand,
-            ),
-          );
+      appBar: AppBar(title: const Text("Products")),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await ref.read(productProvider.notifier).refresh();
         },
+        child: productState.when(
+          loading: () {
+            return const Center(child: CircularProgressIndicator());
+          },
+          error: (error, stackTrace) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(error.toString(), textAlign: TextAlign.center),
+                  const SizedBox(height: 12),
+                  ElevatedButton(
+                    onPressed: () {
+                      ref.invalidate(productProvider);
+                    },
+                    child: const Text("Retry"),
+                  ),
+                ],
+              ),
+            );
+          },
+          data: (products) {
+            return ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+
+                return ListTile(
+                  leading: Image.network(
+                    product.thumbnail,
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                  ),
+                  title: Text(product.title),
+                  subtitle: Text(product.category),
+                  trailing: Text("\$${product.price}"),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,6 +1,19 @@
-import '../../data/models/product_list_response_model.dart';
+class ProductEntity {
+  //final int id;
+  final String title;
+  final String description;
+  final String category;
+  final double price;
+  final double rating;
+  final String thumbnail;
 
-class ProductsEntity{
-  final List<Products> productsList;
-  ProductsEntity({required this.productsList});
+  const ProductEntity({
+    //required this.id,
+    required this.title,
+    required this.description,
+    required this.category,
+    required this.price,
+    required this.rating,
+    required this.thumbnail,
+  });
 }
