@@ -14,6 +14,8 @@
 //   }
 // }
 
+import 'package:riverpod_test_app/features/product/domain/entities/product_detail_entity.dart';
+
 import '../../domain/entities/products_entity.dart';
 import '../../domain/repositories/products_repository.dart';
 import '../datasource/product_datasource.dart';
@@ -30,7 +32,7 @@ class ProductsRepositoryImpl implements ProductsRepository {
     return response.products
         .map(
           (e) => ProductEntity(
-            //id: e.id,
+            id: e.id,
             title: e.title,
             description: e.description,
             category: e.category,
@@ -40,5 +42,11 @@ class ProductsRepositoryImpl implements ProductsRepository {
           ),
         )
         .toList();
+  }
+
+  @override
+  Future<ProductDetailsEntity> getDetailsProducts(int id) async {
+    final response = await dataSource.getProductDetails(id);
+    return response.toEntity();
   }
 }

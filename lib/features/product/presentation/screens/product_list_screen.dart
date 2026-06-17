@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/router/app_router.dart';
 import '../providers/products_provider.dart';
 
 class ProductListScreen extends ConsumerWidget {
@@ -44,16 +45,21 @@ class ProductListScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final product = products[index];
 
-                return ListTile(
-                  leading: Image.network(
-                    product.thumbnail,
-                    width: 50,
-                    height: 50,
-                    fit: BoxFit.cover,
+                return InkWell(
+                  onTap: () {
+                    NavigationService.goToProductDetails(product.id);
+                  },
+                  child: ListTile(
+                    leading: Image.network(
+                      product.thumbnail,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                    title: Text(product.title),
+                    subtitle: Text(product.category),
+                    trailing: Text("\$${product.price}"),
                   ),
-                  title: Text(product.title),
-                  subtitle: Text(product.category),
-                  trailing: Text("\$${product.price}"),
                 );
               },
             );

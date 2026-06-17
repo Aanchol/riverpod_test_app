@@ -6,6 +6,7 @@ import '../../features/product/data/datasource/product_datasource_impl.dart';
 import '../../features/product/data/datasource/products_api_service.dart';
 import '../../features/product/data/repositories/products_repository_impl.dart';
 import '../../features/product/domain/repositories/products_repository.dart';
+import '../../features/product/domain/usecases/product_details_usecase.dart';
 import '../../features/product/domain/usecases/products_usecase.dart';
 import '../network/dio_client.dart';
 
@@ -33,5 +34,8 @@ Future<void> setupInjection() async {
   // UseCase
   getIt.registerLazySingleton<ProductsUseCase>(
     () => ProductsUseCase(getIt<ProductsRepository>()),
+  );
+  getIt.registerLazySingleton<ProductsDetailsUseCase>(
+    () => ProductsDetailsUseCase(getIt<ProductsRepository>()),
   );
 }

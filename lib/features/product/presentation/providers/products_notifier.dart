@@ -11,15 +11,6 @@ class ProductNotifier extends AsyncNotifier<List<ProductEntity>> {
     return await ref.read(getProductsUseCaseProvider).call();
   }
 
-  // late final ProductsUseCase _useCase;
-  //
-  // @override
-  // Future<List<ProductEntity>> build() async {
-  //   _useCase = ref.read(getProductsUseCaseProvider);
-  //
-  //   return await _useCase();
-  // }
-  //
   Future<void> refresh() async {
     state = const AsyncLoading();
 
