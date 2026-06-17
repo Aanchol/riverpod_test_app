@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../features/product/data/datasource/product_datasource.dart';
 import '../../features/product/data/datasource/product_datasource_impl.dart';
 import '../../features/product/data/datasource/products_api_service.dart';
 import '../../features/product/data/repositories/products_repository_impl.dart';
@@ -17,25 +16,17 @@ Future<void> setupInjection() async {
   getIt.registerLazySingleton<Dio>(() => DioClient.create());
 
   // Retrofit
-  getIt.registerLazySingleton<ProductsApiService>(
-    () => ProductsApiService(getIt<Dio>()),
-  );
+  getIt.registerLazySingleton(() => ProductsApiService(getIt()));
 
   // DataSource
-  getIt.registerLazySingleton<ProductsDataSource>(
-    () => ProductsDataSourceImpl(getIt<ProductsApiService>()),
-  );
+  getIt.registerLazySingleton(() => ProductsDataSourceImpl(getIt()));
 
   // Repository
   getIt.registerLazySingleton<ProductsRepository>(
-    () => ProductsRepositoryImpl(getIt<ProductsDataSource>()),
+    () => ProductsRepositoryImpl(getIt()),
   );
 
   // UseCase
-  getIt.registerLazySingleton<ProductsUseCase>(
-    () => ProductsUseCase(getIt<ProductsRepository>()),
-  );
-  getIt.registerLazySingleton<ProductsDetailsUseCase>(
-    () => ProductsDetailsUseCase(getIt<ProductsRepository>()),
-  );
+  getIt.registerLazySingleton(() => ProductsUseCase(getIt()));
+  getIt.registerLazySingleton(() => ProductsDetailsUseCase(getIt()));
 }

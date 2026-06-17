@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_test_app/core/router/app_router.dart';
 
+import '../../../../core/navigation/navigation_service.dart';
 import '../providers/products_provider.dart';
 
 class ProductDetailScreen extends ConsumerWidget {
@@ -30,13 +30,16 @@ class ProductDetailScreen extends ConsumerWidget {
 
         data: (product) {
           return SingleChildScrollView(
-            child: Column(
-              children: [
-                Image.network(product.thumbnail),
-                Text(product.title),
-                Text(product.description),
-                Text("\$${product.price}"),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Image.network(product.thumbnail),
+                  Text(product.title),
+                  Text(product.description),
+                  Text("\$${product.price}"),
+                ],
+              ),
             ),
           );
         },

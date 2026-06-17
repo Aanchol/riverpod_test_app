@@ -1,20 +1,3 @@
-// class AppRouter {
-//   AppRouter._();
-//
-//   static final GoRouter router = GoRouter(
-//     initialLocation: '/products',
-//     routes: [
-//       GoRoute(
-//         path: '/products',
-//         name: 'products',
-//         builder: (context, state) {
-//           return const ProductListScreen();
-//         },
-//       ),
-//     ],
-//   );
-// }
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -37,14 +20,6 @@ final GoRouter appRouter = GoRouter(
   navigatorKey: rootNavigatorKey,
   initialLocation: RoutePaths.productList,
   routes: [
-    // GoRoute(
-    //   path: RoutePaths.home,
-    //   builder: (context, state) => const HomePage(),
-    // ),
-    // GoRoute(
-    //   path: RoutePaths.login,
-    //   builder: (context, state) => const LoginPage(),
-    // ),
     GoRoute(
       path: RoutePaths.productList,
       builder: (context, state) => const ProductListScreen(),
@@ -90,22 +65,3 @@ final GoRouter appRouter = GoRouter(
     ),
   ),
 );
-
-// Navigation service for dependency injection
-class NavigationService {
-  static final GlobalKey<NavigatorState> navigatorKey = rootNavigatorKey;
-
-  static BuildContext get context => navigatorKey.currentContext!;
-
-  static void goToLogin() => appRouter.go(RoutePaths.login);
-
-  static void goToSplash() => appRouter.go(RoutePaths.home);
-
-  static void goToProductDetails(int productId) {
-    appRouter.push('/product-details/$productId');
-  }
-
-  static void pop() => appRouter.pop();
-
-  static bool canPop() => appRouter.canPop();
-}
