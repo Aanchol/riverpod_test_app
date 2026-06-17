@@ -46,7 +46,7 @@ class ProductDetailScreen extends ConsumerWidget {
                     padding: const EdgeInsets.all(16),
                     child: Text(
                       product.title,
-                      style: AppTextStyles.titleXXBoldTextStyle,
+                      style: AppTextStyles.titleXBoldTextStyle,
                     ),
                   ),
                   Padding(

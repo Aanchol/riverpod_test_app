@@ -5,7 +5,7 @@ import 'app_colors.dart';
 class AppTextStyles {
   AppTextStyles._();
 
-  static const titleXXBoldTextStyle = TextStyle(
+  static const titleXBoldTextStyle = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w600,
   );
@@ -20,4 +20,15 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
   static const mediumTextStyle = TextStyle(fontSize: 16, height: 1.5);
+  static const largeBlackTextStyle = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: AppColors.black,
+    fontSize: 12,
+  );
+
+  static const labelTextStyle = TextStyle(
+    color: AppColors.white,
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+  );
 }
