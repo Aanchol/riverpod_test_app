@@ -1,25 +1,10 @@
 import '../../domain/entities/user.dart';
 
 class AuthState {
-  final bool isLoading;
   final User? user;
-  final String? error;
+  final String? token;
 
-  const AuthState({
-    this.isLoading = false,
-    this.user,
-    this.error,
-  });
+  const AuthState({this.user, this.token});
 
-  AuthState copyWith({
-    bool? isLoading,
-    User? user,
-    String? error,
-  }) {
-    return AuthState(
-      isLoading: isLoading ?? this.isLoading,
-      user: user ?? this.user,
-      error: error,
-    );
-  }
+  bool get isLoggedIn => token != null && token!.isNotEmpty;
 }

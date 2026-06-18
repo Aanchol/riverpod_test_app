@@ -23,12 +23,13 @@ class CustomTextField extends StatefulWidget {
     this.prefixIcon,
     this.initValue,
     this.onSuffixTap,
-    required this.readOnly,
+    this.readOnly,
     this.controller,
     this.maxLength = 500,
     this.borderColor,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
+
   final TextEditingController? textEditingController;
   final String hintText;
   final String? labelText;
@@ -46,7 +47,7 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String? val)? validate;
   final int maxLength;
   final String? initValue;
-  final bool readOnly;
+  final bool? readOnly;
   final TextInputType? keyboardType;
   final VoidCallback? onSuffixTap;
   final TextEditingController? controller;
@@ -76,7 +77,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return widget.isObscure
         ? TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            readOnly: widget.readOnly,
+            readOnly: widget.readOnly ?? false,
             initialValue: widget.initValue,
             validator: widget.validate,
             onChanged: widget.onChange,
@@ -92,12 +93,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
               fillColor: widget.fillColor ?? Colors.transparent,
               filled: true,
               prefixIconConstraints: const BoxConstraints(maxWidth: 40),
-              enabledBorder:
-                  widget.borderColor ??
-                  const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
+              // enabledBorder:
+              //     widget.borderColor ??
+              //     const OutlineInputBorder(
+              //       borderRadius: BorderRadius.all(Radius.circular(8)),
+              //       borderSide: BorderSide(color: AppColors.black),
+              //     ),
               suffixIcon: GestureDetector(
                 onTap: () {
                   setState(() {
@@ -116,7 +117,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
           )
         : TextFormField(
-            readOnly: widget.readOnly,
+            readOnly: widget.readOnly ?? false,
             initialValue: widget.initValue,
             validator: widget.validate,
             onChanged: widget.onChange,
@@ -149,12 +150,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
               prefixIconConstraints: const BoxConstraints(maxWidth: 40),
               // border: OutlineInputBorder(
               //     borderRadius: BorderRadius.circular(8), gapPadding: 4.0),
-              enabledBorder:
-                  widget.borderColor ??
-                  const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
+              // enabledBorder:
+              //     widget.borderColor ??
+              //     const OutlineInputBorder(
+              //       borderRadius: BorderRadius.all(Radius.circular(8)),
+              //       borderSide: BorderSide(color: AppColors.black),
+              //     ),
             ),
           );
   }

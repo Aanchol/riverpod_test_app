@@ -65,26 +65,26 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.white,
-      hintStyle: const TextStyle(color: AppColors.textSecondary),
+      hintStyle: const TextStyle(color: AppColors.textPrimary),
       border: OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderSide: BorderSide(color: AppColors.black),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide(color: AppColors.black),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.primary),
-        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide(color: AppColors.black),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderSide: const BorderSide(color: AppColors.red),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       errorBorder: OutlineInputBorder(
         borderSide: const BorderSide(color: AppColors.red),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
     ),
     segmentedButtonTheme: SegmentedButtonThemeData(

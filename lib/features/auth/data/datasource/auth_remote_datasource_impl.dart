@@ -1,31 +1,16 @@
-import 'package:dio/dio.dart';
+import 'package:riverpod_test_app/features/auth/data/datasource/auth_api_service.dart';
+import 'package:riverpod_test_app/features/auth/data/models/login_request.dart';
 
 import '../datasource/auth_remote_datasource.dart';
-import '../models/login_response_models.dart';
+import '../models/login_response_model.dart';
 
-class AuthRemoteDatasourceImpl
-    implements AuthRemoteDatasource {
+class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
+  final AuthApiService authApiService;
 
-  final Dio dio;
-
-  AuthRemoteDatasourceImpl(this.dio);
+  AuthRemoteDatasourceImpl(this.authApiService);
 
   @override
-  Future<LoginResponseModel> login({
-    required String username,
-    required String password,
-  }) async {
-
-    final response = await dio.post(
-      'https://dummyjson.com/auth/login',
-      data: {
-        'username': username,
-        'password': password,
-      },
-    );
-
-    return LoginResponseModel.fromJson(
-      response.data,
-    );
+  Future<LoginResponseModel> login(LoginRequest request) {
+    return authApiService.login(request);
   }
 }

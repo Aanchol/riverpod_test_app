@@ -1,8 +1,6 @@
-import '../models/login_response_models.dart';
+import '../models/login_request.dart';
+import '../models/login_response_model.dart';
 
 abstract class AuthRemoteDatasource {
-  Future<LoginResponseModel> login({
-    required String username,
-    required String password,
-  });
+  Future<LoginResponseModel> login(LoginRequest request);
 }

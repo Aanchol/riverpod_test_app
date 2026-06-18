@@ -63,7 +63,7 @@ class CustomButton extends StatelessWidget {
           //   // ),
           // ],
           border: Border.all(
-            color: borderColor ?? AppColors.white,
+            color: borderColor ?? AppColors.black,
             width: 1.0,
             style: BorderStyle.solid,
           ),

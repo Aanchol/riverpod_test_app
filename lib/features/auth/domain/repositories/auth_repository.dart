@@ -1,8 +1,8 @@
+import '../../data/models/login_request.dart';
 import '../entities/user.dart';
 
 abstract class AuthRepository {
-  Future<User> login({
-    required String username,
-    required String password,
-  });
+  Future<User> login(LoginRequest request);
+
+  Future<String?> getToken();
 }

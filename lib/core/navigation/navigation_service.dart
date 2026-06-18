@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../router/app_router.dart';
 
@@ -7,15 +8,15 @@ class NavigationService {
 
   static BuildContext get context => navigatorKey.currentContext!;
 
-  static void goToLogin() => appRouter.go(RoutePaths.login);
+  static void goToLogin() => context.go(RoutePaths.login);
 
-  static void goToSplash() => appRouter.go(RoutePaths.home);
+  static void goToHome() => context.go(RoutePaths.productList);
 
   static void goToProductDetails(int productId) {
-    appRouter.push('/product-details/$productId');
+    context.push('/product-details/$productId');
   }
 
-  static void pop() => appRouter.pop();
+  static void pop() => context.pop();
 
-  static bool canPop() => appRouter.canPop();
+  static bool canPop() => context.canPop();
 }

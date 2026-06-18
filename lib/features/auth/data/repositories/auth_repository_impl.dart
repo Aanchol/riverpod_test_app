@@ -1,25 +1,28 @@
+import 'package:riverpod_test_app/features/auth/data/datasource/auth_local_datasource.dart';
+import 'package:riverpod_test_app/features/auth/data/models/login_request.dart';
+
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasource/auth_remote_datasource.dart';
 
-class AuthRepositoryImpl
-    implements AuthRepository {
+class AuthRepositoryImpl implements AuthRepository {
+  final AuthRemoteDatasource remoteDatasource;
+  final AuthLocalDataSource localDataSource;
 
-  final AuthRemoteDatasource datasource;
-
-  AuthRepositoryImpl(this.datasource);
+  AuthRepositoryImpl(this.remoteDatasource, this.localDataSource);
 
   @override
-  Future<User> login({
-    required String username,
-    required String password,
-  }) async {
+  Future<User> login(LoginRequest request) async {
+    final response = await remoteDatasource.login(request);
+    print("Access Token: ${response.accessToken}");
+    final token = response.accessToken;
+    await localDataSource.saveToken(token);
+    return response.toEntity();
+  }
 
-    final model = await datasource.login(
-      username: username,
-      password: password,
-    );
-
-    return model.toEntity();
+  @override
+  Future<String?> getToken() {
+    print("Get Token: ${localDataSource.getToken()}");
+    return localDataSource.getToken();
   }
 }

@@ -1,79 +1,100 @@
-//
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-//
-// import '../providers/auth_provider.dart';
-//
-// class LoginPage extends ConsumerWidget {
-//   LoginPage({super.key});
-//
-//   final usernameController =
-//   TextEditingController();
-//
-//   final passwordController =
-//   TextEditingController();
-//
-//   @override
-//   Widget build(
-//       BuildContext context,
-//       WidgetRef ref,
-//       ) {
-//
-//     //final state = ref.watch(authProvider);
-//
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("Login"),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16),
-//         child: Column(
-//           children: [
-//
-//             TextField(
-//               controller: usernameController,
-//               decoration: const InputDecoration(
-//                 hintText: 'Username',
-//               ),
-//             ),
-//
-//             TextField(
-//               controller: passwordController,
-//               decoration: const InputDecoration(
-//                 hintText: 'Password',
-//               ),
-//             ),
-//
-//             const SizedBox(height: 20),
-//
-//             if (state.isLoading)
-//               const CircularProgressIndicator(),
-//
-//             ElevatedButton(
-//               onPressed: () {
-//
-//                 ref
-//                     .read(authProvider.notifier)
-//                     .login(
-//                   username:
-//                   usernameController.text,
-//                   password:
-//                   passwordController.text,
-//                 );
-//               },
-//               child: const Text("Login"),
-//             ),
-//
-//             if (state.user != null)
-//               Text(
-//                 "Welcome ${state.user!.username}",
-//               ),
-//
-//             if (state.error != null)
-//               Text(state.error!,style: TextStyle(color: Colors.red)),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/custom_text_field.dart';
+import '../providers/auth_provider.dart';
+
+class LoginScreen extends ConsumerStatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  late final TextEditingController usernameController;
+  late final TextEditingController passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    usernameController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = ref.watch(authProvider);
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Login')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CustomTextField(
+                textEditingController: usernameController,
+                hintText: 'Username',
+                isObscure: false,
+              ),
+
+              const SizedBox(height: 16),
+
+              CustomTextField(
+                textEditingController: passwordController,
+                hintText: 'Password',
+                isObscure: true,
+              ),
+
+              const SizedBox(height: 24),
+
+              authState.isLoading
+                  ? const CircularProgressIndicator()
+                  : CustomButton(
+                      buttonText: 'Login',
+                      onTap: () {
+                        ref
+                            .read(authProvider.notifier)
+                            .login(
+                              username: usernameController.text,
+                              password: passwordController.text,
+                            );
+                      },
+                    ),
+
+              const SizedBox(height: 24),
+
+              authState.when(
+                data: (auth) {
+                  final user = auth.user;
+
+                  if (user == null) {
+                    return const SizedBox();
+                  }
+
+                  return Text('Welcome ${user.username}');
+                },
+                loading: () => const SizedBox(),
+                error: (e, st) => Text(
+                  e.toString(),
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

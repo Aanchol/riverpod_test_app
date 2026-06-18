@@ -46,7 +46,7 @@ class ProductDetailScreen extends ConsumerWidget {
                     padding: const EdgeInsets.all(16),
                     child: Text(
                       product.title,
-                      style: AppTextStyles.titleXBoldTextStyle,
+                      style: AppTextStyles.titleXLBoldTextStyle,
                     ),
                   ),
                   Padding(
@@ -92,9 +92,11 @@ class ProductDetailScreen extends ConsumerWidget {
                     height: 55,
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: const Text(
+                      child: Text(
                         "Buy Now",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(
+                          fontSize: AppFontSize.semiLargeTextSize,
+                        ),
                       ),
                     ),
                   ),
