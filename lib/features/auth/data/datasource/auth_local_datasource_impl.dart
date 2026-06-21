@@ -1,5 +1,5 @@
 import '../../../../core/constants/app_storage_keys.dart';
-import '../../../../core/storage/hive_storage.dart';
+import '../../../../core/storage/app_preference_storage.dart';
 import 'auth_local_datasource.dart';
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {

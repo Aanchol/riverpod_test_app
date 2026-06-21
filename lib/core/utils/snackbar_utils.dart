@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../navigation/navigation_service.dart';
+import '../router/navigation_service.dart';
 
 class SnackbarUtils {
   static void showError(String message) {

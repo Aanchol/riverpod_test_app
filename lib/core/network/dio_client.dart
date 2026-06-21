@@ -27,9 +27,14 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_test_app/core/constants/api_constants.dart';
 
 class DioClient {
-  DioClient._();
+  static Dio? _instance;
 
-  static Dio create() {
+  static Dio get instance {
+    _instance ??= _create();
+    return _instance!;
+  }
+
+  static Dio _create() {
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstants.baseUrl,

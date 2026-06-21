@@ -18,13 +18,13 @@ import '../../features/product/domain/repositories/products_repository.dart';
 import '../../features/product/domain/usecases/product_details_usecase.dart';
 import '../../features/product/domain/usecases/products_usecase.dart';
 import '../network/dio_client.dart';
-import '../storage/hive_storage.dart';
+import '../storage/app_preference_storage.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setupInjection() async {
   // Dio
-  getIt.registerLazySingleton<Dio>(() => DioClient.create());
+  getIt.registerLazySingleton<Dio>(() => DioClient.instance);
 
   // Retrofit
   getIt.registerLazySingleton<ProductsApiService>(

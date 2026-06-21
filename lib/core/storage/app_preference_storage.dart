@@ -76,21 +76,3 @@ class HiveStorage {
     await Hive.close();
   }
 }
-
-// class HiveStorage {
-//   final Box box;
-//
-//   HiveStorage(this.box);
-//
-//   Future<void> saveToken(String token) async {
-//     await box.put(AppStorageKeys.accessToken, token);
-//   }
-//
-//   String? getToken() {
-//     return box.get(AppStorageKeys.accessToken);
-//   }
-//
-//   Future<void> clear() async {
-//     await box.clear();
-//   }
-// }

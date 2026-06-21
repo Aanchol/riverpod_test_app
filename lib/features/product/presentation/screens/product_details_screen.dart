@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_test_app/core/themes/app_colors.dart';
 import 'package:riverpod_test_app/core/themes/app_text_styles.dart';
 
-import '../../../../core/navigation/navigation_service.dart';
+import '../../../../core/router/navigation_service.dart';
 import '../providers/products_provider.dart';
 
 class ProductDetailScreen extends ConsumerWidget {
