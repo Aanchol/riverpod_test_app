@@ -105,5 +105,43 @@ class AppTheme {
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: AppColors.primary,
     ),
+
+    radioTheme: RadioThemeData(
+      fillColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
+        if (states.contains(WidgetState.disabled)) {
+          return null;
+        }
+        if (states.contains(WidgetState.selected)) {
+          return AppColors.primary;
+        }
+        return null;
+      }),
+    ),
+    switchTheme: SwitchThemeData(
+      thumbColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
+        if (states.contains(WidgetState.disabled)) {
+          return null;
+        }
+        if (states.contains(WidgetState.selected)) {
+          return AppColors.primary;
+        }
+        return null;
+      }),
+      trackColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
+        if (states.contains(WidgetState.disabled)) {
+          return null;
+        }
+        if (states.contains(WidgetState.selected)) {
+          return AppColors.primary;
+        }
+        return null;
+      }),
+    ),
   );
 }
