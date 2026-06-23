@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_test_app/core/widgets/custom_app_bar.dart';
 
 import '../../../../core/router/navigation_service.dart';
 import '../providers/products_provider.dart';
@@ -12,7 +13,7 @@ class ProductListScreen extends ConsumerWidget {
     final productState = ref.watch(productProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Products")),
+      appBar: CustomAppBar(),
       body: RefreshIndicator(
         onRefresh: () async {
           await ref.read(productProvider.notifier).refresh();

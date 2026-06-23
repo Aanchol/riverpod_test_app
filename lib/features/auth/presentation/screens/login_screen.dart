@@ -35,7 +35,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
-
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
       body: Padding(
@@ -55,6 +54,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 textEditingController: passwordController,
                 hintText: 'Password',
                 isObscure: true,
+                suffixIcon: Icon(Icons.visibility),
+                onSuffixTap: () {},
               ),
 
               const SizedBox(height: 24),
@@ -91,6 +92,53 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   style: const TextStyle(color: Colors.red),
                 ),
               ),
+
+              // CustomDropdownField<String>(
+              //   hintText: 'Select Gender',
+              //   items: const ['Male', 'Female', 'Other'],
+              //   itemLabel: (item) => item,
+              //   onChanged: (value) {},
+              // ),
+              // const SizedBox(height: 24),
+              // CustomTextField(
+              //   hintText: 'date',
+              //   isObscure: false,
+              //   suffixIcon: Icon(Icons.calendar_month_rounded),
+              //   onSuffixTap: () {
+              //     final date = AppDatePicker.pickDate(context);
+              //
+              //     print(date.toString());
+              //   },
+              // ),
+              // ImageAvatar(
+              //   fallbackImage: AssetImage(Assets.superMarket),
+              //   shape: BoxShape.rectangle,
+              // ),
+              // const SizedBox(height: 24),
+              // CustomButton(
+              //   onTap: () {
+              //     ImagePickerService.pickImage(ImageSourceType.gallery);
+              //   },
+              //   buttonText: "Gallery",
+              // ),
+              // const SizedBox(height: 24),
+              // CustomButton(
+              //   onTap: () {
+              //     ImagePickerService.pickImage(ImageSourceType.camera);
+              //   },
+              //   buttonText: "Camera",
+              // ),
+              // const SizedBox(height: 24),
+              // CustomButton(
+              //   onTap: () async {
+              //     await CustomDialog.show(
+              //       context: context,
+              //       title: 'Success',
+              //       message: 'Profile updated successfully.',
+              //     );
+              //   },
+              //   buttonText: "Dialog",
+              // ),
             ],
           ),
         ),

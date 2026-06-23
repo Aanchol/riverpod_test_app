@@ -8,4 +8,6 @@ class Assets {
   static const String step1 = 'assets/images/step_1.png';
   static const String step2 = 'assets/images/step_2.png';
   static const String step3 = 'assets/images/step_3.png';
+  static const String superMarket = 'assets/images/supermarket.png';
+  static const String user = 'assets/images/user.png';
 }

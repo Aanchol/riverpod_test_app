@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
+import 'app_text_styles.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -62,12 +63,22 @@ class AppTheme {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.white,
     ),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: AppColors.textPrimary,
+      selectionColor: AppColors.textPrimary,
+      selectionHandleColor: AppColors.textPrimary,
+    ),
+    dropdownMenuTheme: const DropdownMenuThemeData(
+      textStyle: TextStyle(color: AppColors.textPrimary),
+    ),
     inputDecorationTheme: InputDecorationTheme(
+      labelStyle: AppTextStyles.labelTextStyle,
       filled: true,
       fillColor: AppColors.white,
-      hintStyle: const TextStyle(color: AppColors.textPrimary),
+      hintStyle: AppTextStyles.labelTextStyle,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(color: AppColors.black),
       ),
       enabledBorder: OutlineInputBorder(
