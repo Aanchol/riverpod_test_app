@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:riverpod_test_app/core/themes/app_theme.dart';
 
 import 'core/di/injection_container.dart';
 import 'core/router/app_router.dart';
@@ -24,6 +25,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: router,
+      theme: AppTheme.lightTheme,
     );
   }
 }

@@ -5,6 +5,8 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../providers/auth_provider.dart';
 
+enum Settings { home, profile, notification }
+
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
@@ -15,6 +17,9 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   late final TextEditingController usernameController;
   late final TextEditingController passwordController;
+  String selectedFilter = "";
+  int selectedCategory = 0;
+  Set<Settings> selected = {Settings.home};
 
   @override
   void initState() {
@@ -35,6 +40,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
+
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
       body: Padding(
@@ -54,8 +60,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 textEditingController: passwordController,
                 hintText: 'Password',
                 isObscure: true,
-                suffixIcon: Icon(Icons.visibility),
-                onSuffixTap: () {},
+                //suffixIcon: Icon(Icons.visibility),
+                //onSuffixTap: () {},
               ),
 
               const SizedBox(height: 24),
@@ -121,7 +127,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               //   },
               //   buttonText: "Gallery",
               // ),
-              // const SizedBox(height: 24),
+              //const SizedBox(height: 24),
               // CustomButton(
               //   onTap: () {
               //     ImagePickerService.pickImage(ImageSourceType.camera);
@@ -138,6 +144,53 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               //     );
               //   },
               //   buttonText: "Dialog",
+              // ),
+              // CustomSearchAutocomplete<String>(
+              //   options: const ['Apple', 'Banana', 'Cherry', 'Date'],
+              //   displayStringForOption: (item) => item,
+              //   onSelected: (value) {
+              //     debugPrint(value);
+              //   },
+              //   hintText: 'Search fruit',
+              // ),
+              // const SizedBox(height: 24),
+              // CustomFilterChip(
+              //   label: 'Popular',
+              //   selected: selectedFilter == 'Popular',
+              //   onTap: () {
+              //     setState(() {
+              //       selectedFilter = 'Popular';
+              //     });
+              //   },
+              //   selectedColor: AppColors.textSecondary,
+              //   showCheckMark: true,
+              // ),
+              // const SizedBox(height: 24),
+              // CustomSegmentedButton<Settings>(
+              //   multiSelectionEnabled: true,
+              //   segments: [
+              //     const ButtonSegment(
+              //       value: Settings.home,
+              //       label: Text('Home'),
+              //       icon: Icon(Icons.home),
+              //     ),
+              //     ButtonSegment(
+              //       value: Settings.profile,
+              //       label: const Text('Profile'),
+              //       icon: const Icon(Icons.person),
+              //     ),
+              //     ButtonSegment(
+              //       value: Settings.notification,
+              //       label: const Text('Alert'),
+              //       icon: const Icon(Icons.star),
+              //     ),
+              //   ],
+              //   selectedValue: selected,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       selected = value;
+              //     });
+              //   },
               // ),
             ],
           ),
