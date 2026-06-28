@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_test_app/features/auth/presentation/screens/login_screen.dart';
 
 import '../../features/auth/presentation/providers/auth_provider.dart';
+import '../../features/dashboard/presentation/screens/dashboard_screen.dart';
 import '../../features/product/presentation/screens/product_details_screen.dart';
 import '../../features/product/presentation/screens/product_list_screen.dart';
 
@@ -13,6 +14,7 @@ class RoutePaths {
   static const String login = '/login';
   static const String productList = '/product-list';
   static const String productDetails = '/product-details/:id';
+  static const String dashboard = '/dashboard';
 }
 
 // Global navigator keys
@@ -55,6 +57,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: RoutePaths.login,
         builder: (context, state) => LoginScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.dashboard,
+        builder: (context, state) => DashboardScreen(),
       ),
     ],
     errorBuilder: (context, state) => Scaffold(

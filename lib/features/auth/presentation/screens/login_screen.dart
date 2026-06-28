@@ -5,8 +5,6 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../providers/auth_provider.dart';
 
-enum Settings { home, profile, notification }
-
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
@@ -19,7 +17,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   late final TextEditingController passwordController;
   String selectedFilter = "";
   int selectedCategory = 0;
-  Set<Settings> selected = {Settings.home};
 
   @override
   void initState() {
@@ -165,7 +162,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               //   selectedColor: AppColors.textSecondary,
               //   showCheckMark: true,
               // ),
-              // const SizedBox(height: 24),
+              //const SizedBox(height: 24),
               // CustomSegmentedButton<Settings>(
               //   multiSelectionEnabled: true,
               //   segments: [
@@ -191,6 +188,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               //       selected = value;
               //     });
               //   },
+              // ),
+              // CustomButton(
+              //   onTap: () {
+              //     BottomSheetHelper.show(
+              //       context: context,
+              //       title: 'Select Category',
+              //       child: Column(
+              //         mainAxisSize: MainAxisSize.min,
+              //         children: [
+              //           ListTile(
+              //             title: const Text('Electronics'),
+              //             onTap: () => Navigator.pop(context, 'Electronics'),
+              //           ),
+              //           ListTile(
+              //             title: const Text('Fashion'),
+              //             onTap: () => Navigator.pop(context, 'Fashion'),
+              //           ),
+              //         ],
+              //       ),
+              //     );
+              //   },
+              //   buttonText: 'Open Bottom Sheet',
               // ),
             ],
           ),
